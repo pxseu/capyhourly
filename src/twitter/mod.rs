@@ -13,7 +13,9 @@ use reqwest_oauth1::{OAuthClientProvider, Secrets};
 
 use crate::POST_INTERVAL_SECS;
 
-use self::types::{BaseResponse, InitMediaResponse, MeUser, Tweet, TweetMedia, TweetRequest};
+use self::types::{
+    BaseResponse, InitMediaResponse, MeUser, Tweet, TweetMedia, TweetRequest, TweetResponse,
+};
 
 const TWITTER_API_BASE_URL: &str = "https://api.twitter.com";
 const TWITTER_MEDIA_BASE_URL: &str = "https://upload.twitter.com";
@@ -187,7 +189,7 @@ impl<'a> TwitterClient<'a> {
     /// Returns the tweet ID.
     pub async fn post_tweet(&self, media_id: &str) -> Result<String> {
         let tweet = self
-            .twitter_request::<BaseResponse<Tweet>>(
+            .twitter_request::<BaseResponse<TweetResponse>>(
                 "POST",
                 "/2/tweets",
                 &[],

@@ -35,3 +35,8 @@ pub struct TweetRequest {
 pub struct TweetMedia {
     pub media_ids: Vec<String>,
 }
+
+#[derive(Debug, Deserialize)]
+pub struct TweetResponse {
+    pub id: String,
+}
