@@ -36,6 +36,15 @@ impl CapyLol {
             .to_str()?
             .to_string();
 
+        let id = image
+            .headers()
+            .get("x-capybara-index")
+            .ok_or_else(|| anyhow!("Missing x-capybara-index header"))?
+            .to_str()?
+            .to_string();
+
+        println!("Got image with id {id}");
+
         let bytes = image.bytes().await?;
 
         Ok((content_type, bytes.to_vec()))
